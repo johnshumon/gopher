@@ -1,0 +1,26 @@
+service: hello-world
+
+provider:
+  name: aws
+  profile: fixura_pg
+  region: eu-central-1
+  stage: dev
+  runtime: go1.x
+  memorySize: 128
+
+package:
+  exclude:
+  - ./**
+  include:
+  - ./bin/**
+
+plugins:
+  - serverless-offline
+
+functions:
+  hello-world:
+    handler: bin/hello
+    events:
+    - http:
+        path: /
+        method: get
